@@ -9,7 +9,9 @@ import "highlight.js/styles/atom-one-dark.css"
 import { parsePrompts } from "~/utils/parse"
 import { setting, message, resetContinuousDialogue   } from "~/system"
 // const prompts = parsePrompts()
-const prompts = []
+
+const prompt = '我希望你充当 javascript 控制台。我将键入命令，您将回复 javascript 控制台应显示的内容。我希望您只在一个唯一的代码块内回复终端输出，而不是其他任何内容。不要写解释。除非我指示您这样做。我的第一个命令是：'
+
 const defaultMessage = import.meta.env.DEFAULT_MESSAGE || process.env.DEFAULT_MESSAGE || message
 let defaultSetting
 try {
@@ -28,6 +30,6 @@ const reset = import.meta.env.RESET_CONTINUOUS_DIALOGUE_OPTION === String(resetC
       defaultSetting,
       defaultMessage,
       resetContinuousDialogue: reset ? resetContinuousDialogue : !resetContinuousDialogue
-    }} prompts={prompts} client:visible />
+    }} prompts={[]} prompt={prompt} client:visible />
   </main>
 </Layout>

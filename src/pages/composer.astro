@@ -9,7 +9,9 @@ import "highlight.js/styles/atom-one-dark.css"
 import { parsePrompts } from "~/utils/parse"
 import { setting, message, resetContinuousDialogue   } from "~/system"
 // const prompts = parsePrompts()
-const prompts = []
+
+const prompt = '我想让你扮演作曲家。我会提供一首歌的歌词，你会为它创作音乐。这可能包括使用各种乐器或工具，例如合成器或采样器，以创造使歌词栩栩如生的旋律和和声。我的第一个请求是'
+
 const defaultMessage = import.meta.env.DEFAULT_MESSAGE || process.env.DEFAULT_MESSAGE || message
 let defaultSetting
 try {
@@ -28,6 +30,6 @@ const reset = import.meta.env.RESET_CONTINUOUS_DIALOGUE_OPTION === String(resetC
       defaultSetting,
       defaultMessage,
       resetContinuousDialogue: reset ? resetContinuousDialogue : !resetContinuousDialogue
-    }} prompts={prompts} client:visible />
+    }} prompts={[]} prompt={prompt} client:visible />
   </main>
 </Layout>

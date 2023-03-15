@@ -9,7 +9,9 @@ import "highlight.js/styles/atom-one-dark.css"
 import { parsePrompts } from "~/utils/parse"
 import { setting, message, resetContinuousDialogue   } from "~/system"
 // const prompts = parsePrompts()
-const prompts = []
+
+const prompt = '小红书的风格是：很吸引眼球的标题，每个段落都加 emoji, 最后加一些 tag。请用小红书风格'
+
 const defaultMessage = import.meta.env.DEFAULT_MESSAGE || process.env.DEFAULT_MESSAGE || message
 let defaultSetting
 try {
@@ -28,6 +30,6 @@ const reset = import.meta.env.RESET_CONTINUOUS_DIALOGUE_OPTION === String(resetC
       defaultSetting,
       defaultMessage,
       resetContinuousDialogue: reset ? resetContinuousDialogue : !resetContinuousDialogue
-    }} prompts={prompts} client:visible />
+    }} prompts={[]} prompt={prompt} client:visible />
   </main>
 </Layout>

@@ -9,7 +9,9 @@ import "highlight.js/styles/atom-one-dark.css"
 import { parsePrompts } from "~/utils/parse"
 import { setting, message, resetContinuousDialogue   } from "~/system"
 // const prompts = parsePrompts()
-const prompts = []
+
+const prompt = '知乎的风格是：用"谢邀"开头，用很多学术语言，引用很多名言，做大道理的论述，提到自己很厉害的教育背景并且经验丰富，最后还要引用一些论文。请用知乎风格'
+
 const defaultMessage = import.meta.env.DEFAULT_MESSAGE || process.env.DEFAULT_MESSAGE || message
 let defaultSetting
 try {
@@ -28,6 +30,6 @@ const reset = import.meta.env.RESET_CONTINUOUS_DIALOGUE_OPTION === String(resetC
       defaultSetting,
       defaultMessage,
       resetContinuousDialogue: reset ? resetContinuousDialogue : !resetContinuousDialogue
-    }} prompts={prompts} client:visible />
+    }} prompts={[]} prompt={prompt} client:visible />
   </main>
 </Layout>

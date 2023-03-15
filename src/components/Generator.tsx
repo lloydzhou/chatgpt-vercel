@@ -18,6 +18,7 @@ export interface PromptItem {
 
 export default function (props: {
   prompts: PromptItem[]
+  prompt: string
   env: {
     defaultSetting: Setting
     defaultMessage: string
@@ -41,7 +42,7 @@ export default function (props: {
   const [setting, setSetting] = createSignal(defaultSetting)
   const [compatiblePrompt, setCompatiblePrompt] = createSignal<PromptItem[]>([])
   const [containerWidth, setContainerWidth] = createSignal("init")
-  const fzf = new Fzf(props.prompts, {
+  const fzf = new Fzf(props.prompts||[], {
     selector: k => `${k.desc} (${k.prompt})`
   })
   const [height, setHeight] = createSignal("48px")
@@ -99,6 +100,9 @@ export default function (props: {
       }
     } catch {
       console.log("Setting parse error")
+    }
+    if (props.prompt) {
+      handleButtonClick(props.prompt)
     }
   })
 
