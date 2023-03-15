@@ -18,7 +18,8 @@ export interface PromptItem {
 
 export default function (props: {
   prompts: PromptItem[]
-  prompt: string
+  prompt?: string
+  system?: string
   env: {
     defaultSetting: Setting
     defaultMessage: string
@@ -27,6 +28,8 @@ export default function (props: {
 }) {
   let inputRef: HTMLTextAreaElement
   let containerRef: HTMLDivElement
+
+  const { prompt, system } = props
 
   const { defaultMessage, defaultSetting, resetContinuousDialogue } = props.env
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([
@@ -101,13 +104,13 @@ export default function (props: {
     } catch {
       console.log("Setting parse error")
     }
-    if (props.prompt) {
-      handleButtonClick(props.prompt)
+    if (prompt) {
+      fetchGPT(prompt)
     }
   })
 
   createEffect(() => {
-    if (messageList().length === 0) {
+    if (messageList().length === 0 && (!system && defaultMessage)) {
       setMessageList([
         {
           role: "assistant",
@@ -213,9 +216,9 @@ export default function (props: {
     const response = await fetch("/api/stream", {
       method: "POST",
       body: JSON.stringify({
-        messages: setting().continuousDialogue
+        messages: (system ? [{role: 'system', content: system}] : []).concat(setting().continuousDialogue
           ? [...messageList().slice(0, -1), message]
-          : [message],
+          : [message]),
         key: setting().openaiAPIKey,
         temperature: setting().openaiAPITemperature / 100
       }),
