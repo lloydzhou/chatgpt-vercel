@@ -11,4 +11,3 @@ RUN cd /app && yarn install && yarn run build && rm -rf node_modules/.vite
 WORKDIR /app
 
 CMD ["yarn", "run", "preview", "--host", "0.0.0.0", "--verbose"]
-~                                       
