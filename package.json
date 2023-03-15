@@ -31,6 +31,7 @@
     "solid-js": "^1.6.11"
   },
   "devDependencies": {
+    "@astrojs/node": "^5.1.0",
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/ri": "^1.1.5",
     "@types/markdown-it": "^12.2.3",
